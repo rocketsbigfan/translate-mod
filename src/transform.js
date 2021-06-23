@@ -1,5 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-multi-assign */
+const { resolve } = require('path');
 const jscodeshift = require('jscodeshift');
 const fs = require('fs');
 
@@ -8,7 +9,7 @@ const intlJson = {};
 const reflectJson = {};
 
 function mkDir() {
-  const root = `${__dirname}/intl.json`;
+  const root = `${resolve(process.cwd(), 'src')}/intl.json`;
   if (fs.existsSync(root)) {
     fs.unlinkSync(root);
   }
