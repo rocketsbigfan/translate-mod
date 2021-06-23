@@ -1,7 +1,7 @@
 {
   "name": "translate-mod",
   "bin": {
-    "translate": "./src/bin/index.js"
+    "translate": "/bin/index.js"
   },
   "version": "1.1.0",
   "description": "translate cn to intl",
@@ -24,10 +24,11 @@
   },
   "homepage": "https://github.com/rocketsbigfan/translate-mod#readme",
   "devDependencies": {
-    "globby": "^11.0.4",
-    "jscodeshift": "^0.12.0"
+    "globby": "^11.0.4"
   },
   "dependencies": {
-    "commander": "^7.2.0"
+    "@babel/preset-env": "^7.14.7",
+    "commander": "^7.2.0",
+    "jscodeshift": "^0.12.0"
   }
 }
