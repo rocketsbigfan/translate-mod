@@ -5,11 +5,17 @@ const pkg = require('../../package.json')
 const start = require("..")
 program
   .version(pkg.version)
-  .option('-s --start', 'start translate', start)
-
+  .command('build', { isDefault: true })
+  .description('launch web server')
+  .option('-p, --path <path>', 'specified path')
+  .option('-i, --ignore <regpex>', 'path regpex')
+  .action((options) => {
+    const { path, ignore } = options
+    start({path, ignore})
+  })
+  .parse(process.argv)
+  
 program.on('--help', function(){  
   console.log('');  
   console.log('use translate !');  
 });
-
-program.parse(process.argv)
