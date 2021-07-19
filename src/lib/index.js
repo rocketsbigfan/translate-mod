@@ -6,7 +6,7 @@ const start = require("..")
 program
   .version(pkg.version)
   .command('build', { isDefault: true })
-  .description('launch web server')
+  .description('translate cn to intl function')
   .option('-p, --path <path>', 'specified path')
   .option('-i, --ignore <regpex>', 'path regpex')
   .action((options) => {
