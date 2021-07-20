@@ -19,7 +19,7 @@ program
   .command('build', { isDefault: true })
   .description('translate cn to intl function')
   .action(() => {
-    let { entry, syncOptions } = config
+    let { entry, syncOptions = {} } = config
     entry = entry || defaultProps.entry
 
     syncOptions = syncOptions.ignore ? {
