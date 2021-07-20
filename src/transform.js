@@ -3,18 +3,19 @@
 const { resolve } = require('path');
 const jscodeshift = require('jscodeshift');
 const fs = require('fs');
+const chalk = require('chalk');
 
 let i = 0;
 const intlJson = {};
 const reflectJson = {};
 
-function mkDir() {
-  const root = `${resolve(process.cwd(), 'src')}/intl.json`;
+function mkDir(entry) {
+  const root = `${resolve(process.cwd(), entry)}/intl.json`;
   if (fs.existsSync(root)) {
     fs.unlinkSync(root);
   }
-  console.log(intlJson);
   fs.writeFileSync(root, JSON.stringify(intlJson));
+  console.log(chalk.green('build successful'))
 }
 
 function transformer(content, parser) {

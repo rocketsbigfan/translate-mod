@@ -2,15 +2,14 @@ const { resolve } = require('path');
 const { sync } = require('globby');
 const { readFileSync, writeFileSync } = require('fs');
 const ProgressBar = require('progress');
+const cwd = process.cwd()
 const { transformer, mkDir } = require('./transform');
 
 
-function start({path, ignore}) {
-  const root = resolve(process.cwd(), path || 'src');
-  const options = ignore ? {
-    ignore: `${root}${ignore}`, // /.umi/**
-  }: {}
-  const files = sync([`${root}/**/!(*.d).{ts,tsx,js,jsx}`], options).map((x) => resolve(x));
+function start({entry, syncOptions}) {
+  const root = resolve(cwd, entry);
+
+  const files = sync([`${root}/**/!(*.d).{ts,tsx,js,jsx}`], syncOptions).map((x) => resolve(x));
   const filesLen = files.length;
   
   // 进度条功能
@@ -22,15 +21,17 @@ function start({path, ignore}) {
   });
 
   for (let i = 0; i < filesLen; i += 1) {
+    // 进度条显示
     bar.tick(i)
+    // 单文件处理
     const file = files[i];
     const index = file.lastIndexOf('.');
-    const parser = file.substr(index + 1);
+    const fileType = file.substr(index + 1);
     const content = readFileSync(file, 'utf-8');
-    const resContent = transformer(content, parser);
+    const resContent = transformer(content, fileType);
     writeFileSync(file, resContent, 'utf8');
   }
-  filesLen && mkDir();
+  filesLen && mkDir(entry);
 }
 
 module.exports = start

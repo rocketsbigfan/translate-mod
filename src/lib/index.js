@@ -1,17 +1,33 @@
 #! /usr/bin/env node
 
 const { program } = require("commander")
+const { resolve } = require('path');
 const pkg = require('../../package.json')
 const start = require("..")
+const cwd = process.cwd()
+const config = require(cwd+'/transform.config.js')
+const srcRoot = resolve(cwd, 'src')
+const defaultProps = {
+  entry: 'src',
+  syncOptions: {
+    ignore: `${srcRoot}/.umi/**`, // /.umi/**
+    dot: true
+  }
+}
 program
   .version(pkg.version)
   .command('build', { isDefault: true })
   .description('translate cn to intl function')
-  .option('-p, --path <path>', 'specified path')
-  .option('-i, --ignore <regpex>', 'path regpex')
-  .action((options) => {
-    const { path, ignore } = options
-    start({path, ignore})
+  .action(() => {
+    let { entry, syncOptions } = config
+    entry = entry || defaultProps.entry
+
+    syncOptions = syncOptions.ignore ? {
+      ...syncOptions,
+      ignore: resolve(cwd, ignore)
+    }: defaultProps.syncOptions
+
+    start({entry, syncOptions})
   })
   .parse(process.argv)
   
