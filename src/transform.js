@@ -54,7 +54,7 @@ function transformer(content, parser) {
         });
 
         const comments = (path.node.comments = path.node.comments || []);
-        const comment = j.commentBlock(`${hash}: ${value}`, true, false); // 生成行注释
+        const comment = j.commentBlock(` ${hash}: ${value} `, true, false); // 生成行注释
         comments.push(comment);
       });
       // 处理字面量
@@ -81,7 +81,7 @@ function transformer(content, parser) {
           return p.node.raw;
         });
         const comments = (path.node.comments = path.node.comments || []);
-        const comment = j.commentBlock(`${hash}: ${value}`, true, false); // 生成行注释
+        const comment = j.commentBlock(` ${hash}: ${value} `, true, false); // 生成行注释
         comments.push(comment);
       });
     }
