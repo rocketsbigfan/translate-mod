@@ -1,9 +1,20 @@
 # translate-mod
 
-将代码中的中文改成intl.get的形式
-使用jscodeshift作为转化插件
+基于jscodeshift插件开发的，可以批量重构文件的脚手架
 
 ## 用法
+
+先将项目clone到本地，然后通过**yarn link**来关联项目
+
+```bash
+git clone https://github.com/rocketsbigfan/translate-mod.git
+
+cd ./translate-mod
+
+yarn link
+```
+
+在你本地的项目下，在使用**yarn link translate-mod**
 
 ```javascript
 script: {
@@ -13,9 +24,7 @@ script: {
 }
 ```
 
-## 参数
-
-可在自己项目下配置translate.config.js，示例如下
+可在自己项目下配置transform.config.js，示例如下
 
 ```javascript
 {
@@ -28,6 +37,5 @@ script: {
   },
   successCallBack: Function,
   coreFn: (j: core.JSCodeshift, root: Collection<any>) => string,
-
 }
 ```
