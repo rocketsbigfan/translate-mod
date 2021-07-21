@@ -1,11 +1,10 @@
 {
   "name": "translate-mod",
   "bin": {
-    "translate": "./src/bin/index.js"
+    "translate": "bin/index.js"
   },
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "translate cn to intl",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,9 +22,12 @@
     "url": "https://github.com/rocketsbigfan/translate-mod/issues"
   },
   "homepage": "https://github.com/rocketsbigfan/translate-mod#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/jscodeshift": "^0.11.2"
+  },
   "dependencies": {
     "@babel/preset-env": "^7.14.7",
+    "chalk": "^4.1.1",
     "commander": "^7.2.0",
     "globby": "^11.0.4",
     "jscodeshift": "^0.12.0",
